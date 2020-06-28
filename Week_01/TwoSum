@@ -1,0 +1,59 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null) {
+            return null;
+        }
+
+        //4:重构3，去掉临时变量
+        Map<Integer, Integer> map = new HashMap(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[]{i, map.get(target - nums[i])};//顺序有可能是颠倒的:i,j
+            }
+
+            map.put(nums[i], i);
+        }
+
+        return null;
+
+        // //3:优化2: 2ms;99.58%;在建立hash索引的时候，直接进行计算判定，减少二次遍历操作
+        // Map<Integer,Integer> map=new HashMap(nums.length);
+        // for(int i=0;i<nums.length;i++){
+        //     int temp=target-nums[i];
+        //     if(map.containsKey(temp)){
+        //         return new int[]{i,map.get(temp)};//顺序有可能是颠倒的:i,j
+        //     }
+
+        //     map.put(nums[i],i);
+        // }
+
+        // return null;
+
+        // //2 Hashmap:3ms;76.03%
+        // HashMap map=new HashMap(nums.length);
+        // for(int i=0;i<nums.length;i++){
+        //     map.put(nums[i],i);
+        // }
+
+        // for(int i=0;i<nums.length;i++){
+        //     if(map.containsKey(target-nums[i])){
+        //         if(i!=(int)map.get(target-nums[i])){
+        //             return new int[]{i,(int)map.get(target-nums[i])};
+        //         }
+        //     }
+        // }
+
+        // return null;
+
+        // //1 暴力法:68ms;35.38%
+        // for(int i=0;i<nums.length-1;i++){
+        //     for(int j=i+1;j<nums.length;j++){
+        //         if(nums[i]+nums[j]==target){
+        //             return new int[]{i,j};
+        //         }
+        //     }
+        // }
+
+        //  return null;
+    }
+}
